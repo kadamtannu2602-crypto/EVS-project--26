@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgriDirect</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+  :root { --green: #2e7d32; --light: #f4f9f4; --dark: #1b3a1d; }
+  body { background: var(--light); color: var(--dark); }
+
+  header {
+    background: var(--green); color: #fff; padding: 14px 24px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+  }
+  header h1 { font-size: 1.4rem; }
+  .lang-switch select { padding: 6px 10px; border-radius: 6px; border: none; font-size: 0.9rem; }
+
+  .hero { text-align: center; padding: 60px 20px 40px; }
+  .hero h2 { font-size: 2rem; margin-bottom: 10px; }
+  .hero p { color: #555; margin-bottom: 24px; }
+  .btn {
+    background: var(--green); color: #fff; border: none; padding: 12px 28px;
+    border-radius: 8px; font-size: 1rem; cursor: pointer; margin: 4px;
+  }
+  .btn:hover { background: var(--dark); }
+  .btn-outline { background: transparent; color: var(--green); border: 2px solid var(--green); }
+
+  section { max-width: 1000px; margin: 0 auto; padding: 30px 20px; }
+  h3.section-title { text-align: center; font-size: 1.5rem; margin-bottom: 24px; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .card {
+    background: #fff; border-radius: 12px; padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .card .icon { font-size: 2rem; }
+  .card h4 { margin: 8px 0 6px; }
+  .card p { font-size: 0.9rem; color: #666; }
+
+  .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+  .product { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .product .img { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 3rem; background: #e8f5e9; }
+  .product .info { padding: 14px; }
+  .product .farmer { font-size: 0.8rem; color: #777; }
+  .price { color: var(--green); font-weight: bold; }
+
+  #chatbox {
+    position: fixed; bottom: 20px; right: 20px; width: 300px;
+    background: #fff; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    display: none; flex-direction: column; overflow: hidden;
+  }
+  #chatbox.open { display: flex; }
+  #chatbox .chat-head { background: var(--green); color: #fff; padding: 10px 14px; display: flex; justify-content: space-between; }
+  #chatbox .messages { padding: 12px; height: 200px; overflow-y: auto; font-size: 0.85rem; }
+  #chatbox .msg { background: var(--light); border-radius: 8px; padding: 8px; margin-bottom: 8px; }
+  #chatbox form { display: flex; border-top: 1px solid #eee; }
+  #chatbox input { flex: 1; border: none; padding: 10px; font-size: 0.9rem; outline: none; }
+  #chatbox button { background: var(--green); color: #fff; border: none; padding: 0 16px; cursor: pointer; }
+
+  #chatBtn { position: fixed; bottom: 20px; right: 20px; width: 56px; height: 56px; border-radius: 50%;
+    background: var(--green); color: #fff; border: none; font-size: 1.4rem; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25); }
+  #chatBtn.hidden { display: none; }
+
+  footer { text-align: center; padding: 20px; font-size: 0.8rem; color: #888; }
+  @media (max-width: 600px) { .hero h2 { font-size: 1.4rem; } }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌱 <span data-i18n="brand">AgriDirect</span></h1>
+  <div class="lang-switch">
+    <select id="langSelect" onchange="setLang(this.value)">
+      <option value="en">English</option>
+      <option value="hi">हिन्दी</option>
+      <option value="mr">मराठी</option>
+    </select>
+  </div>
+</header>
+
+<div class="hero">
+  <h2 data-i18n="heroTitle">From Farm to Your Home — No Middlemen</h2>
+  <p data-i18n="heroSub">Better prices for farmers. Fresher food, lower prices for you.</p>
+  <button class="btn" data-i18n="shopNow" onclick="document.getElementById('products').scrollIntoView()">Shop Fresh Produce</button>
+  <button class="btn btn-outline" data-i18n="joinFarmer" onclick="alert(t('joinMsg'))">Join as Farmer / FPO</button>
+</div>
+
+<section>
+  <h3 class="section-title" data-i18n="whyTitle">Why AgriDirect?</h3>
+  <div class="cards">
+    <div class="card"><div class="icon">🤝</div><h4 data-i18n="c1t">Direct Connection</h4><p data-i18n="c1d">Farmers and FPOs sell directly to consumers and bulk buyers.</p></div>
+    <div class="card"><div class="icon">🚚</div><h4 data-i18n="c2t">Logistics Support</h4><p data-i18n="c2d">AI-optimized delivery routes from farm to doorstep.</p></div>
+    <div class="card"><div class="icon">📊</div><h4 data-i18n="c3t">Demand Forecasting</h4><p data-i18n="c3d">AI predicts demand so farmers grow what sells.</p></div>
+    <div class="card"><div class="icon">💬</div><h4 data-i18n="c4t">In Your Language</h4><p data-i18n="c4d">Chat support in English, Hindi and Marathi.</p></div>
+  </div>
+</section>
+
+<section id="products">
+  <h3 class="section-title" data-i18n="prodTitle">Today's Fresh Produce</h3>
+  <div class="products" id="productGrid"></div>
+</section>
+
+<!-- Consumer Chat Widget -->
+<button id="chatBtn" onclick="toggleChat(true)">💬</button>
+<div id="chatbox">
+  <div class="chat-head"><span data-i18n="chatTitle">Chat with us</span><span style="cursor:pointer" onclick="toggleChat(false)">✕</span></div>
+  <div class="messages" id="messages"></div>
+  <form onsubmit="sendMsg(event)">
+    <input id="chatInput" data-i18n-placeholder="chatPlaceholder" placeholder="Type your message...">
+    <button>➤</button>
+  </form>
+</div>
+
+<footer>© 2026 AgriDirect — <span data-i18n="footer">Empowering Farmers, Serving Consumers</span></footer>
+
+<script>
+/* ---------- i18n ---------- */
+const translations = {
+  en: {
+    brand: "AgriDirect",
+    heroTitle: "From Farm to Your Home — No Middlemen",
+    heroSub: "Better prices for farmers. Fresher food, lower prices for you.",
+    shopNow: "Shop Fresh Produce",
+    joinFarmer: "Join as Farmer / FPO",
+    joinMsg: "Farmer registration coming soon! Contact us at hello@agridirect.in",
+    whyTitle: "Why AgriDirect?",
+    c1t: "Direct Connection", c1d: "Farmers and FPOs sell directly to consumers and bulk buyers.",
+    c2t: "Logistics Support", c2d: "AI-optimized delivery routes from farm to doorstep.",
+    c3t: "Demand Forecasting", c3d: "AI predicts demand so farmers grow what sells.",
+    c4t: "In Your Language", c4d: "Chat support in English, Hindi and Marathi.",
+    prodTitle: "Today's Fresh Produce",
+    chatTitle: "Chat with us",
+    chatPlaceholder: "Type your message...",
+    footer: "Empowering Farmers, Serving Consumers",
+    botReply: "Thanks for your message! Our team will reply soon in your language. 🙏",
+    addToCart: "Add to Cart",
+    saved: "Saved to cart!",
+    perKg: "/kg"
+  },
+  hi: {
+    brand: "एग्रीडायरेक्ट",
+    heroTitle: "खेत से आपके घर तक — कोई बिचौलिया नहीं",
+    heroSub: "किसानों को बेहतर दाम। आपको ताज़ा और सस्ता सामान।",
+    shopNow: "ताज़ी सब्ज़ियाँ खरीदें",
+    joinFarmer: "किसान / FPO के रूप में जुड़ें",
+    joinMsg: "किसान पंजीकरण जल्द आ रहा है! संपर्क करें: hello@agridirect.in",
+    whyTitle: "एग्रीडायरेक्ट क्यों?",
+    c1t: "सीधा संपर्क", c1d: "किसान और FPO सीधे उपभोक्ताओं और थोक खरीदारों को बेचते हैं।",
+    c2t: "लॉजिस्टिक्स सहायता", c2d: "AI-अनुकूलित डिलीवरी मार्ग, खेत से दरवाज़े तक।",
+    c3t: "मांग अनुमान", c3d: "AI बताता है कि कौन सी फसल बिकेगी।",
+    c4t: "आपकी भाषा में", c4d: "हिन्दी, मराठी और अंग्रेज़ी में चैट सहायता।",
+    prodTitle: "आज की ताज़ी उपज",
+    chatTitle: "हमसे बात करें",
+    chatPlaceholder: "अपना संदेश लिखें...",
+    footer: "किसानों को सशक्त बनाना, उपभोक्ताओं की सेवा",
+    botReply: "आपके संदेश के लिए धन्यवाद! हमारी टीम जल्द जवाब देगी। 🙏",
+    addToCart: "कार्ट में डालें",
+    saved: "कार्ट में जोड़ा गया!",
+    perKg: "/किलो"
+  },
+  mr: {
+    brand: "अ‍ॅग्रीडायरेक्ट",
+    heroTitle: "शेतातून तुमच्या घरापर्यंत — कोणताही दलाल नाही",
+    heroSub: "शेतकऱ्यांना चांगले भाव. तुम्हाला ताजी आणि स्वस्त उत्पादने.",
+    shopNow: "ताजी भाजी खरेदी करा",
+    joinFarmer: "शेतकरी / FPO म्हणून सामील व्हा",
+    joinMsg: "शेतकरी नोंदणी लवकरच! संपर्क: hello@agridirect.in",
+    whyTitle: "अ‍ॅग्रीडायरेक्ट का?",
+    c1t: "प्रत्यक्ष संपर्क", c1d: "शेतकरी आणि FPO थेट ग्राहकांना व घाऊक खरेदीदारांना विकतात.",
+    c2t: "वाहतूक मदत", c2d: "AI-अनुकूलित वितरण मार्ग, शेतापासून घरापर्यंत.",
+    c3t: "मागणी अंदाज", c3d: "AI सांगतो कोणती पीक विकेल.",
+    c4t: "तुमच्या भाषेत", c4d: "मराठी, हिंदी आणि इंग्रजीमध्ये चॅट मदत.",
+    prodTitle: "आजची ताजी उत्पादने",
+    chatTitle: "आमच्याशी बोला",
+    chatPlaceholder: "तुमचा संदेश लिहा...",
+    footer: "शेतकऱ्यांना सक्षम करणे, ग्राहकांची सेवा",
+    botReply: "तुमच्या संदेशाबद्दल धन्यवाद! आमची टीम लवकरच उत्तर देईल. 🙏",
+    addToCart: "कार्टमध्ये टाका",
+    saved: "कार्टमध्ये जोडले!",
+    perKg: "/किलो"
+  }
+};
+
+let lang = localStorage.getItem("lang") || "en";
+const t = key => translations[lang][key] || translations.en[key] || key;
+
+function setLang(l) {
+  lang = l;
+  localStorage.setItem("lang", l);
+  document.documentElement.lang = l;
+  document.querySelectorAll("[data-i18n]").forEach(el => el.textContent = t(el.dataset.i18n));
+  document.querySelectorAll("[data-i18n-placeholder]").forEach(el => el.placeholder = t(el.dataset.i18nPlaceholder));
+  document.getElementById("langSelect").value = l;
+  renderProducts();
+}
+
+/* ---------- Products (mock data — replace with API) ---------- */
+const products = [
+  { emoji: "🍅", name: {en:"Tomatoes", hi:"टमाटर", mr:"टोमॅटो"}, price: 28, farmer: {en:"Ram Patil, Nashik", hi:"राम पाटील, नाशिक", mr:"राम पाटील, नाशिक"} },
+  { emoji: "🧅", name: {en:"Onions", hi:"प्याज़", mr:"कांदे"}, price: 22, farmer: {en:"Sunita Devi, Indore", hi:"सुनीता देवी, इंदौर", mr:"सुनीता देवी, इंदूर"} },
+  { emoji: "🥬", name: {en:"Spinach", hi:"पालक", mr:"पालक"}, price: 15, farmer: {en:"FPO Green Valley", hi:"FPO ग्रीन वैली", mr:"FPO ग्रीन व्हॅली"} },
+  { emoji: "🌾", name: {en:"Wheat Flour", hi:"गेहूं का आटा", mr:"गहू पीठ"}, price: 45, farmer: {en:"Vikram Singh, Baramati", hi:"विक्रम सिंह, बारामती", mr:"विक्रम सिंग, बारामती"} }
+];
+
+function renderProducts() {
+  const grid = document.getElementById("productGrid");
+  grid.innerHTML = products.map(p => `
+    <div class="product">
+      <div class="img">${p.emoji}</div>
+      <div class="info">
+        <h4>${p.name[lang] || p.name.en}</h4>
+        <div class="farmer">👨‍🌾 ${p.farmer[lang] || p.farmer.en}</div>
+        <div class="price">₹${p.price} ${t("perKg")}</div>
+        <button class="btn" style="width:100%;margin-top:10px;padding:8px" onclick="alert('${t("saved")}')">${t("addToCart")}</button>
+      </div>
+    </div>`).join("");
+}
+
+/* ---------- Chat ---------- */
+function toggleChat(open) {
+  document.getElementById("chatbox").classList.toggle("open", open);
+  document.getElementById("chatBtn").classList.toggle("hidden", open);
+}
+function sendMsg(e) {
+  e.preventDefault();
+  const input = document.getElementById("chatInput");
+  if (!input.value.trim()) return;
+  const msgs = document.getElementById("messages");
+  msgs.innerHTML += `<div class="msg"><b>You:</b> ${input.value}</div>`;
+  input.value = "";
+  setTimeout(() => {
+    msgs.innerHTML += `<div class="msg"><b>AgriDirect:</b> ${t("botReply")}</div>`;
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 600);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+/* ---------- Init ---------- */
+setLang(lang);
+</script>
+</body>
+</html>
