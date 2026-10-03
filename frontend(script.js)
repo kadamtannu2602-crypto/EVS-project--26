@@ -1,0 +1,24 @@
+function openLogin() {
+    document.getElementById("loginModal").style.display = "flex";
+}
+
+function closeLogin() {
+    document.getElementById("loginModal").style.display = "none";
+}
+
+function loginUser() {
+    alert("Login functionality will be connected to the backend.");
+    closeLogin();
+}
+
+function joinFarmer() {
+    alert("Farmer registration page coming soon!");
+}
+
+function farmerDashboard() {
+    window.location.href = "farmer-dashboard.html";
+}
+
+function bulkBuyer() {
+    alert("Bulk buyer section coming soon!");
+}
