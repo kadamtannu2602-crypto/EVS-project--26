@@ -1,0 +1,290 @@
+//html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FarmDirect | Farmer to Consumer Marketplace</title>
+
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<header>
+    <nav class="navbar">
+
+        <div class="logo">
+            🌱 FarmDirect
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="marketplace.html">Marketplace</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="orders.html">Orders</a></li>
+        </ul>
+
+        <button class="login-btn" onclick="openLogin()">
+            Login
+        </button>
+
+    </nav>
+</header>
+
+
+<!-- HERO SECTION -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <span class="tag">
+            SMART AGRICULTURAL MARKETPLACE
+        </span>
+
+        <h1>
+            From <span>Farm</span><br>
+            Directly to You
+        </h1>
+
+        <p>
+            Connect directly with farmers and Farmer Producer
+            Organisations. Buy fresh agricultural products with
+            transparent pricing and smarter delivery.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="marketplace.html" class="primary-btn">
+                Explore Marketplace
+            </a>
+
+            <button class="secondary-btn" onclick="joinFarmer()">
+                Join as Farmer
+            </button>
+
+        </div>
+
+    </div>
+
+    <div class="hero-image">
+
+        <div class="farmer-card">
+
+            <div class="farmer-icon">
+                👨‍🌾
+            </div>
+
+            <h3>Direct Farmer Connection</h3>
+
+            <p>
+                Better market access for farmers.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- USER TYPES -->
+
+<section class="users">
+
+    <h2>One Platform. Three Users.</h2>
+
+    <div class="user-container">
+
+        <div class="user-card">
+
+            <div class="icon">👨‍🌾</div>
+
+            <h3>Farmers / FPOs</h3>
+
+            <p>
+                List your products, set prices and manage orders.
+            </p>
+
+            <button onclick="farmerDashboard()">
+                Farmer Dashboard
+            </button>
+
+        </div>
+
+
+        <div class="user-card">
+
+            <div class="icon">🛒</div>
+
+            <h3>Consumers</h3>
+
+            <p>
+                Discover fresh produce directly from farmers.
+            </p>
+
+            <button onclick="location.href='marketplace.html'">
+                Start Shopping
+            </button>
+
+        </div>
+
+
+        <div class="user-card">
+
+            <div class="icon">🏢</div>
+
+            <h3>Bulk Buyers</h3>
+
+            <p>
+                Find available produce and place large orders.
+            </p>
+
+            <button onclick="bulkBuyer()">
+                Bulk Purchase
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="how">
+
+    <h2>How It Works</h2>
+
+    <div class="steps">
+
+        <div class="step">
+            <span>01</span>
+            <h3>Register</h3>
+            <p>Join as a farmer, consumer or bulk buyer.</p>
+        </div>
+
+        <div class="step">
+            <span>02</span>
+            <h3>List Products</h3>
+            <p>Farmers add available agricultural produce.</p>
+        </div>
+
+        <div class="step">
+            <span>03</span>
+            <h3>Find Buyers</h3>
+            <p>Consumers and buyers discover products.</p>
+        </div>
+
+        <div class="step">
+            <span>04</span>
+            <h3>Smart Delivery</h3>
+            <p>Orders are consolidated and routes optimized.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SMART TECHNOLOGY -->
+
+<section class="technology">
+
+    <div class="tech-text">
+
+        <span class="tag">SMART LOGISTICS</span>
+
+        <h2>
+            Technology for a
+            Smarter Supply Chain
+        </h2>
+
+        <p>
+            Our platform combines digital marketplace technology
+            with demand forecasting and route optimization to
+            support efficient agricultural distribution.
+        </p>
+
+        <div class="tech-buttons">
+
+            <div>
+                📊
+                <strong>Demand Forecasting</strong>
+                <small>Estimate future product demand</small>
+            </div>
+
+            <div>
+                🚚
+                <strong>Route Optimization</strong>
+                <small>Plan efficient delivery routes</small>
+            </div>
+
+            <div>
+                📦
+                <strong>Shipment Consolidation</strong>
+                <small>Combine nearby compatible orders</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h3>🌱 FarmDirect</h3>
+
+    <p>
+        Direct Farmer-to-Consumer Marketplace
+        with Smart Logistics
+    </p>
+
+    <p class="copyright">
+        © 2026 FarmDirect. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<!-- LOGIN POPUP -->
+
+<div id="loginModal" class="modal">
+
+    <div class="modal-box">
+
+        <span class="close" onclick="closeLogin()">×</span>
+
+        <h2>Welcome Back</h2>
+
+        <input
+            type="email"
+            placeholder="Email Address"
+        >
+
+        <input
+            type="password"
+            placeholder="Password"
+        >
+
+        <button onclick="loginUser()">
+            Login
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="js/script.js"></script>
+
+</body>
+</html>
